@@ -231,7 +231,74 @@ Classların kodlanması:
 }
 ```
 Socket sınıfı da yukarıdaki şekilde kodlanmaktadır. SocketAdapter çıktıyı 120, 12 ve 3 volt olacak şekilde vermektedir. <br/> <br/>
-2 tip Adapter
+2 tip Adapter nesnesi oluşturma tipi vardır. Birincisi Socket sınıfından extend edilerek oluşturulan “Adapter” dır. Buna Class Adapter Implementation denir. 
+SocketClassAdapterImpl sınıfının kodlanması:
+
+```java
+public class SocketClassAdapterImpl extends Socket implements SocketAdapter{
+  
+    @Override
+    public Volt get120Volt() {
+        return getVolt();
+    }
+    
+    @Override
+    public Volt get12Volt() {
+        Volt v= getVolt();
+        return convertVolt(v,10);
+    }
+    
+    @Override
+     public Volt get3Volt() {
+        Volt v= getVolt();
+        return convertVolt(v,40);
+    }
+    
+    private Volt convertVolt(Volt v, int i) {
+        return new Volt(v.getVolts()/i);
+    }
+}
+```
+İkinciside Object Adapter Implementation Socket sınıfından extend etmek yerine bu nesneyi içerisinde tutarak Adapter işlemini gerçekleştirir. 
+SocketObjectAdapterImpl sınıfının kodlanması:
+
+```java
+public class SocketObjectAdapterImpl implements SocketAdapter{
+
+    private Socket sock = new Socket();
+    
+    @Override
+    public Volt get120Volt() {
+        return sock.getVolt();
+    }
+    
+    @Override
+    public Volt get12Volt() {
+        Volt v= sock.getVolt();
+        return convertVolt(v,10);
+    }
+    
+    @Override
+     public Volt get3Volt() {
+        Volt v= sock.getVolt();
+        return convertVolt(v,40);
+    }
+    
+    private Volt convertVolt(Volt v, int i) {
+        return new Volt(v.getVolts()/i);
+    }
+}
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
