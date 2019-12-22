@@ -198,7 +198,7 @@ Adapter Tasarım Deseni Örneği:
 240V ve 120V elektrik veren prizlerden cep telefonlarını  şarj etmek için kullanılan telefon şarj ediciler aslında 120/240 V → 3V dönüştürü adaptörlerdir.
 Örnek kodda 120V üreten bir Socket bulunmaktadır. <br/> <br/>
 
-
+![adapter tasarım deseni class dig2](https://user-images.githubusercontent.com/59052653/71326766-ba171200-2510-11ea-9a10-0d064f092515.PNG)
 <br/>
 Classların kodlanması:
 
