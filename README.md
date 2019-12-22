@@ -17,6 +17,8 @@ Factory interface sınıfı LgFactory ve İPhoneFactory alt interface sınıflar
 Sarj_Cihazi abstract sınıfın ise LG_Sarj_Cihazi ve iPhone_Sarj_Cihazi adında alt sınıfları oluşturarak farklı şarj cihazları üretilmesi sağlıyor. Usb_Kablo sınıfıda Lg_Usb_Kablo ve iPhone_Usb_Kablo alt sınıflarını oluşturarak farklı usb kabloların oluşturulmasını sağlıyor. Factory interface sınıfının alt sınıfları, LG ve iPhone markalarına özel usb kablosu ve  şarj cihazlarını kullanıcının bilgisi olmadan üretilmesini sağlayacaktır. <br/> <br/>
 
 ```java
+package Abstract_Factory_Design_Pattern;
+
 public abstract class Sarj_Cihazi {
    private String sarjCihaziModel;
    
@@ -29,7 +31,73 @@ public abstract class Sarj_Cihazi {
    }
 }
 ```
-Sarj_Cihazi abstract sınıfı yukarıdaki kod ile kodlanıyor. Yapıcı metodunda şarj cihazı modeli bilgisinin alınması bilgi sahibi  olmayı sağlar. 
+Sarj_Cihazi abstract sınıfı yukarıdaki kod ile kodlanıyor. Yapıcı metodunda şarj cihazı modeli bilgisinin alınması bilgi sahibi  olmayı sağlar. <br/>
+
+```java
+package Abstract_Factory_Design_Pattern;
+
+public class Lg_Sarj_Cihazi extends Sarj_Cihazi {
+
+   public Lg_Sarj_Cihazi() {
+      super("LG şarj Cihazı");
+   }
+}
+```
+```java
+package Abstract_Factory_Design_Pattern;
+
+public class iPhone_Sarj_Cihazi extends Sarj_Cihazi {
+    
+    public iPhone_Sarj_Cihazi() {
+       super("iPhone şarj Cihazi");
+    }
+}
+```
+Sarj_Cihazi sınıfı iphone ve lg için üretilen sınıflara miras yolu ile tanımlanmaktadır. <br/>
+
+```java
+package Abstract_Factory_Design_Pattern;
+
+public abstract class Usb_Kablo {
+
+    private String kabloModel;
+    
+    public Usb_Kablo(String kabloModel) {
+        this.kabloModel=kabloModel;
+    }
+    
+    public String getKabloModel() {
+       return kabloModel;
+    }
+ }
+```
+Usb_Kablo sınıfı yukarıdaki şekilde ile kodlanıyor. Constructor(yapıcı) metot üzerinden kablo modeli bilgisinin alınması bilgi sahibi olmayı sağlar.
+
+```java
+package Abstract_Factory_Design_Pattern;
+
+public class Lg_Usb_Kablo extends Usb_Kablo {
+
+    public Lg_Usb_Kablo() {
+       super("LG Usb Kablo");
+    }
+}
+```
+```java
+package Abstract_Factory_Design_Pattern;
+
+public class iPhone_Usb_Kablo extends Usb_Kablo{
+
+     public iPhone_Usb_Kablo() {
+         super("iPhone USB Kablo");
+     }
+}
+```
+Yukarıdaki kodlarda Usb_Kablo sınıfının alt sınıfları oluşturularak her marka için ayrı bir usb kablo sınıfı oluşturulmaktadır.
+
+
+
+
 
 
 
