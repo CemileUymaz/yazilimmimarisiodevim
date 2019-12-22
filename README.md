@@ -95,6 +95,94 @@ public class iPhone_Usb_Kablo extends Usb_Kablo{
 ```
 Yukarıdaki kodlarda Usb_Kablo sınıfının alt sınıfları oluşturularak her marka için ayrı bir usb kablo sınıfı oluşturulmaktadır.
 
+```java
+package Abstract_Factory_Design_Pattern;
+
+public interface Factory {
+   public Sarj_Cihazi makeSarjCihazi();
+   public Usb_Kablo makeUsbKablo();
+}
+```
+Factory interface sınıfı ile bir fabrikada yapılması istenen işlemler için olması istenen metotlar tanımlanmaktadır.
+
+```java
+package Abstract_Factory_Design_Pattern;
+
+public class LgFactory implements Factory {
+    @Override
+    public Sarj_Cihazi makeSarjCihazi() {
+       return new Lg_Sarj_Cihazi();
+    }
+    
+    @Override
+    public Usb_Kablo makeUsbKablo() {
+        return new Lg_Usb_Kablo();
+    }
+}
+```
+```java
+package Abstract_Factory_Design_Pattern;
+
+public class iPhoneFactory implements Factory {
+
+   @Override
+   public Sarj_Cihazi makeSarjCihazi() {
+       return new iPhone_Sarj_Cihazi();
+   }
+   
+   @Override
+   public Usb_Kablo makeUsbKablo() {
+       return new iPhone_Usb_Kablo();
+   }
+}
+```
+Yukarıdaki kodlar ile iPhone ve LG Factory interface alt sınıfları oluşturulmaktadır.Bu sınıflar aracılığıyla her markanın sadece kendisine ait parçaların üretilmesi sağlanıyor.
+
+```java
+package Abstract_Factory_Design_Pattern;
+
+public class FactoryMaker {
+   public static Factory getFactory(String factoryName){
+      if(factoryName.equals("lg"))
+          return new LgFactory();
+      else if(factoryName.equals("iphone"))
+          return new iPhoneFactory();
+          
+      return null;
+   }
+}
+```
+FactoryMaker sınıfında ise talep edilen marka parametre olarak alınarak bu markaya ait Factory alt interface sınıfı döndürülmektedir.  
+
+```java
+package Abstract_Factory_Design_Pattern;
+
+public class Client {
+   public void doSomeClientJob(String factoryName){
+      Usb_Kablo usbKablo=FactoryMaker.getFactory(factoryName).makeUsbKablo();
+      System.out.println(usbKablo.getKabloModel());
+      
+      Sarj_Cihazi sarjCihazi=FactoryMaker.getFactory(factoryName).makeSarjCihazi();
+      
+      System.out.Println(sarjCihazi.getSarjCihaziModel());
+   }
+}
+```
+Client sınıfı ile istenilen markaya özel kablo ve şarj cihazı FactoryMaker sınıfı kullanılarak üretimi sağlanıyor ve ekran çıktıları alınmaktadır.
+
+```java
+package Abstract_Factory_Design_Pattern;
+
+public class Test {
+   public static void main(String[] args) {
+      Client client = new Client();
+      client.doSomeClientJob("lg");
+   }
+}
+```
+Test sınıfında ise sadece lg markasını yazarak kullanıcı arkada hangi sınıf ve alt sınıfların çalışacağını bilmeden aşağıda ki çıktıyı elde etmektedir. <br/>
+**LG Usb Kablo** <br/>
+**Lg Şarj Cihazı**
 
 
 
