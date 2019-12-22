@@ -180,7 +180,7 @@ public class Test {
    }
 }
 ```
-Test sınıfında ise sadece lg markasını yazarak kullanıcı arkada hangi sınıf ve alt sınıfların çalışacağını bilmeden aşağıda ki çıktıyı elde etmektedir. <br/>
+Test sınıfında ise sadece lg markasını yazarak kullanıcı arkada hangi sınıf ve alt sınıfların çalışacağını bilmeden aşağıdaki çıktıyı elde etmektedir. <br/>
 **LG Usb Kablo** <br/>
 **Lg Şarj Cihazı**
 
