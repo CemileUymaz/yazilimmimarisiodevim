@@ -184,8 +184,54 @@ Test sınıfında ise sadece lg markasını yazarak kullanıcı arkada hangi sı
 **LG Usb Kablo** <br/>
 **Lg Şarj Cihazı**
 
+<br/> <br/> <br/> <br/>
+## Adaptör (Adapter) Tasarım Deseni
+Adaptör tasarım deseni, structural tasarım desenlerinden biridir. Bu tasarım deseni, birbiriyle ilişkili olmayan interface'lerin birlikte çalışmasını sağlar. Bu işlemi ise, bir sınıfın interface'ini diğer bir interface'e dönüştürerek yapar.  
+İsmini gerçek hayattaki adaptörlerden alan adapter tasarım deseni farklı interface'lere sahip sınıfların birbiriyle çalışabilmesini sağlamak amacıyla kullanılır. Ayrıca adaptasyon işlemi sırasında, adapte edilen nesnenin desteklemediği özellikler de adaptör tarafından gerçekleştirilebilir. <br/> <br/>
+Kullanımı: Var olan sistemin interface'i, target interface olarak adlandırılır. Bu interface'i implement edecek bir Adapter sınıfı yaratılır.  Adapter sınıfında, Adaptee interface türünden bir sınıf değişkeni bulunur. Son olarak client sınıfı Adapter sınıfı nesnesi ve Adaptee nesnesini yaratır.  <br/> <br/>
+Faydaları:
+1. Birbiriyle ilişkili olmayan interface'lerin birlikte çalışmasını sağlar.
+2. Kodların yeniden yazılması engeller.
+3. Var olan modül(ler) değiştirilmeden sisteme yeni modüller eklenebilir.  <br/> <br/>
 
+Adapter Tasarım Deseni Örneği:
+240V ve 120V elektrik veren prizlerden cep telefonlarını  şarj etmek için kullanılan telefon şarj ediciler aslında 120/240 V → 3V dönüştürü adaptörlerdir.
+Örnek kodda 120V üreten bir Socket bulunmaktadır. <br/> <br/>
 
+resim
+ <br/>
+ Classların kodlanması:
+ 
+ ```java
+ public class Volt {
+ 
+    private int volts;
+    
+    public Volt(int v) {
+        this.volts=v;
+    }
+    
+    public int getVolts() {
+       return volts;
+    }
+    
+    public void setVolts(int volts) {
+       this.volts = volts;
+    }
+ }
+ ```
+ Volt sınıfı yukarıdaki şekilde kodlanmaktadır. Yapıcı metot üzerinden volt bilgisi alınmaktadır. <br/>
+ 
+ ```java
+ public class Socket {
+    
+    public Volt getVolt(){
+        return new Volt(120);
+    }
+}
+```
+Socket sınıfı da yukarıdaki şekilde kodlanmaktadır. SocketAdapter çıktıyı 120, 12 ve 3 volt olacak şekilde vermektedir. <br/> <br/>
+2 tip Adapter
 
 
 
