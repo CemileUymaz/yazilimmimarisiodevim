@@ -1,6 +1,6 @@
 # yazilimmimarisiodevim
 
-## Soyut Fabrika ( Abstract Factory )
+## Soyut Fabrika ( Abstract Factory ) Tasarım Deseni
 Soyut fabrika tasarım deseni, cretional (yaratımsal) tasarım desenlerinden birisidir. Bu desene fabrikaların fabrikası(factories of the factory) da denir.
 Bu tasarım deseni, birbiriyle alakalı veya bağımlı nesnelerin somut sınıflarını belirtmeden,yaratılması için gerekli olan arayüzü sağlar. Birbirlerinden farklı yapılarda fakat ortak işlevlere sahip birçok nesne üretme ihtiyacı duyulabilir. Bu nesneler de; kendi içlerinde bağlı oldukları diğer nesneleri üretmek zorundadır. Bu durumda soyut fabrika tasarım deseni kullanılır. Fabrika tasarım deseni ile farkı: fabrika tasarım deseni tek tip nesne oluşturulur, soyut fabrika deseni ise birden fazla fabrika deseni ile hiyerarşik yapıda oluşturularak çeşitli tipte nesneler oluşturur. <br/> <br/>
 Kullanımı: Her bir Product alt sınıfları için bir fabrika sınıfı oluşturmak gereklidir. Bu oluşturulacak fabrika sınıfları ise türü interface veya abstract olan bir süper fabrika sınıfından türemelidir. <br/> <br/>
@@ -8,7 +8,7 @@ Faydaları:
 1. Client (istemci) sınıfına, bir abstract arayüz kullanmasını sağlayarak, gerçekte üretilecek ilişkili Product sınıflarını bilmeden veya önemsemeden oluşturulmasına olanak tanır.
 2. if-else yapısından kurtararak daha anlaşılır kod yazmayı sağlar. <br/> <br/>
 
-Soyut Fabrika Tasarım Deseni Örneği:
+Soyut Fabrika Tasarım Deseni Örneği: <br/>
 iPhone ve LG telefonlar için parça üreten bir fabrikada, iPhone ve LG için ayrı şarj kablosu ve şarj cihazı üreten fabrikanın kullandığı soyut fabrika deseni: <br/> <br/>
 
 ![soyut tasarım deseni class dig1](https://user-images.githubusercontent.com/59052653/71321724-ddb96880-24ce-11ea-8b00-179c7227dba9.png)
@@ -20,15 +20,15 @@ Sarj_Cihazi abstract sınıfın ise LG_Sarj_Cihazi ve iPhone_Sarj_Cihazi adında
 package Abstract_Factory_Design_Pattern;
 
 public abstract class Sarj_Cihazi {
-   private String sarjCihaziModel;
+    private String sarjCihaziModel;
    
-   public Sarj_Cihazi(String sarjCihaziModel){
-       this.sarjCihaziModel=sarjCihaziModel;
-   }
+    public Sarj_Cihazi(String sarjCihaziModel){
+        this.sarjCihaziModel=sarjCihaziModel;
+    }
    
-   public String getSarjCihaziModel() {
-       return sarjCihaziModel;
-   }
+    public String getSarjCihaziModel() {
+        return sarjCihaziModel;
+    }
 }
 ```
 Sarj_Cihazi abstract sınıfı yukarıdaki kod ile kodlanıyor. Yapıcı metodunda şarj cihazı modeli bilgisinin alınması bilgi sahibi  olmayı sağlar. <br/>
@@ -38,9 +38,9 @@ package Abstract_Factory_Design_Pattern;
 
 public class Lg_Sarj_Cihazi extends Sarj_Cihazi {
 
-   public Lg_Sarj_Cihazi() {
-      super("LG şarj Cihazı");
-   }
+    public Lg_Sarj_Cihazi() {
+        super("LG şarj Cihazı");
+    }
 }
 ```
 ```java
@@ -49,7 +49,7 @@ package Abstract_Factory_Design_Pattern;
 public class iPhone_Sarj_Cihazi extends Sarj_Cihazi {
     
     public iPhone_Sarj_Cihazi() {
-       super("iPhone şarj Cihazi");
+        super("iPhone şarj Cihazi");
     }
 }
 ```
@@ -67,7 +67,7 @@ public abstract class Usb_Kablo {
     }
     
     public String getKabloModel() {
-       return kabloModel;
+        return kabloModel;
     }
  }
 ```
@@ -79,7 +79,7 @@ package Abstract_Factory_Design_Pattern;
 public class Lg_Usb_Kablo extends Usb_Kablo {
 
     public Lg_Usb_Kablo() {
-       super("LG Usb Kablo");
+        super("LG Usb Kablo");
     }
 }
 ```
@@ -99,8 +99,8 @@ Yukarıdaki kodlarda Usb_Kablo sınıfının alt sınıfları oluşturularak her
 package Abstract_Factory_Design_Pattern;
 
 public interface Factory {
-   public Sarj_Cihazi makeSarjCihazi();
-   public Usb_Kablo makeUsbKablo();
+    public Sarj_Cihazi makeSarjCihazi();
+    public Usb_Kablo makeUsbKablo();
 }
 ```
 Factory interface sınıfı ile bir fabrikada yapılması istenen işlemler için olması istenen metotlar tanımlanmaktadır.
@@ -111,7 +111,7 @@ package Abstract_Factory_Design_Pattern;
 public class LgFactory implements Factory {
     @Override
     public Sarj_Cihazi makeSarjCihazi() {
-       return new Lg_Sarj_Cihazi();
+        return new Lg_Sarj_Cihazi();
     }
     
     @Override
@@ -143,10 +143,10 @@ package Abstract_Factory_Design_Pattern;
 
 public class FactoryMaker {
    public static Factory getFactory(String factoryName){
-      if(factoryName.equals("lg"))
-          return new LgFactory();
-      else if(factoryName.equals("iphone"))
-          return new iPhoneFactory();
+       if(factoryName.equals("lg"))
+           return new LgFactory();
+       else if(factoryName.equals("iphone"))
+           return new iPhoneFactory();
           
       return null;
    }
@@ -158,13 +158,13 @@ FactoryMaker sınıfında ise talep edilen marka parametre olarak alınarak bu m
 package Abstract_Factory_Design_Pattern;
 
 public class Client {
-   public void doSomeClientJob(String factoryName){
-      Usb_Kablo usbKablo=FactoryMaker.getFactory(factoryName).makeUsbKablo();
-      System.out.println(usbKablo.getKabloModel());
+    public void doSomeClientJob(String factoryName){
+        Usb_Kablo usbKablo=FactoryMaker.getFactory(factoryName).makeUsbKablo();
+        System.out.println(usbKablo.getKabloModel());
       
-      Sarj_Cihazi sarjCihazi=FactoryMaker.getFactory(factoryName).makeSarjCihazi();
+        Sarj_Cihazi sarjCihazi=FactoryMaker.getFactory(factoryName).makeSarjCihazi();
       
-      System.out.Println(sarjCihazi.getSarjCihaziModel());
+        System.out.Println(sarjCihazi.getSarjCihaziModel());
    }
 }
 ```
@@ -175,8 +175,8 @@ package Abstract_Factory_Design_Pattern;
 
 public class Test {
    public static void main(String[] args) {
-      Client client = new Client();
-      client.doSomeClientJob("lg");
+       Client client = new Client();
+       client.doSomeClientJob("lg");
    }
 }
 ```
@@ -194,7 +194,7 @@ Faydaları:
 2. Kodların yeniden yazılması engeller.
 3. Var olan modül(ler) değiştirilmeden sisteme yeni modüller eklenebilir.  <br/> <br/>
 
-Adapter Tasarım Deseni Örneği:
+Adapter Tasarım Deseni Örneği: <br/>
 240V ve 120V elektrik veren prizlerden cep telefonlarını  şarj etmek için kullanılan telefon şarj ediciler aslında 120/240 V → 3V dönüştürü adaptörlerdir.
 Örnek kodda 120V üreten bir Socket bulunmaktadır. <br/> <br/>
 
@@ -205,19 +205,19 @@ Classların kodlanması:
 ```java
  public class Volt {
  
-    private int volts;
+     private int volts;
     
-    public Volt(int v) {
-        this.volts=v;
-    }
+     public Volt(int v) {
+         this.volts=v;
+     }
     
-    public int getVolts() {
-       return volts;
-    }
+     public int getVolts() {
+         return volts;
+     }
     
-    public void setVolts(int volts) {
-       this.volts = volts;
-    }
+     public void setVolts(int volts) {
+         this.volts = volts;
+     }
  }
  ```
  Volt sınıfı yukarıdaki şekilde kodlanmaktadır. Yapıcı metot üzerinden volt bilgisi alınmaktadır. <br/>
@@ -225,8 +225,8 @@ Classların kodlanması:
  ```java
  public class Socket {
     
-    public Volt getVolt(){
-        return new Volt(120);
+     public Volt getVolt(){
+         return new Volt(120);
     }
 }
 ```
@@ -250,8 +250,8 @@ public class SocketClassAdapterImpl extends Socket implements SocketAdapter{
     
     @Override
      public Volt get3Volt() {
-        Volt v= getVolt();
-        return convertVolt(v,40);
+         Volt v= getVolt();
+         return convertVolt(v,40);
     }
     
     private Volt convertVolt(Volt v, int i) {
@@ -280,8 +280,8 @@ public class SocketObjectAdapterImpl implements SocketAdapter{
     
     @Override
      public Volt get3Volt() {
-        Volt v= sock.getVolt();
-        return convertVolt(v,40);
+         Volt v= sock.getVolt();
+         return convertVolt(v,40);
     }
     
     private Volt convertVolt(Volt v, int i) {
@@ -290,15 +290,5 @@ public class SocketObjectAdapterImpl implements SocketAdapter{
 }
 ```
 
-
-
-
-
-
-
-
-
-
-
-
+2 tipten istenilen bir tip seçilip kodlanabilmektedir.
 
